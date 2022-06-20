@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -16,6 +17,7 @@
     "mongoose": "^6.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
-    "socket.io": "^4.5.1"
+    "socket.io": "^4.5.1",
+    "validator": "^13.7.0"
   }
 }
