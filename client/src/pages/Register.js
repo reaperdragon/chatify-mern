@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MeshGradient from "../assets/img/background.png";
 import { FormRow } from "../components";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
+import { loginUser, registerUser } from "../features/user/userSlice";
 
 const initialState = {
   username: "",
@@ -16,6 +21,12 @@ const initialState = {
 const Register = () => {
   const [values, setValues] = useState(initialState);
 
+  const { user, isLoadingUser } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -26,8 +37,7 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    const { username, email, password, fullName, isMember } = values;
+    const { username, fullName, email, password, isMember } = values;
 
     if (
       !email ||
@@ -40,15 +50,21 @@ const Register = () => {
     }
 
     if (isMember) {
-      console.log(email, password);
-      setValues({ username: "", fullName: "", email: "", password: "" });
-      return;
-    } else {
-      console.log(username, fullName, email, password);
-      setValues({ username: "", fullName: "", email: "", password: "" });
+      dispatch(loginUser({ email: email, password: password }));
       return;
     }
+    dispatch(registerUser({ username, fullName, email, password }));
+
+    setValues({ username: "", fullName: "", email: "", password: "" });
   };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <Wrapper>

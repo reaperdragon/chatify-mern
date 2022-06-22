@@ -46,6 +46,7 @@ const register = async (req, res) => {
 
   res.status(StatusCodes.CREATED).json({
     _id: user._id,
+    username: user.username,
     email: user.email,
     fullName: user.fullName,
     token,
@@ -90,6 +91,7 @@ const login = async (req, res) => {
 
   res.status(StatusCodes.OK).json({
     _id: isUser._id,
+    username: isUser.username,
     email: isUser.email,
     fullName: isUser.fullName,
     token,
