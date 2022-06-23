@@ -4,21 +4,18 @@ import User from "../models/user.js";
 
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader || !authHeader.startsWith("Bearer")) {
-    throw new UnAuthenticatedError("Authentication Invalid!");
+    throw new UnAuthenticatedError("Authentication Invalid");
   }
-
   const token = authHeader.split(" ")[1];
-
   try {
-    const payload = jwt.sign(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = { id: payload.userId };
 
-    req.user = await User.findById(payload.userId).select("-password");
+    next();
   } catch (error) {
-    throw new UnAuthenticatedError("Authenticated Invalid!");
+    throw new UnAuthenticatedError("Authentication Invalid");
   }
-  next();
 };
 
 export default auth;

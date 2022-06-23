@@ -3,6 +3,9 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
+import morgan from "morgan";
+
+
 import "express-async-errors";
 
 //connect DB
@@ -20,6 +23,10 @@ import authRoute from "./routes/auth.js";
 import chatRoute from "./routes/chat.js";
 
 const app = express();
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json());
 app.use(cors());
