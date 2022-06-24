@@ -50,11 +50,18 @@ const initialState = {
   user: getUserFromLocalStorage(),
   isLoadingUser: false,
   users: [],
+  selectedId: "",
+  isSelected: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
+  reducers: {
+    setSelectedId: (state, action) => {
+      return { ...state, selectedId: true, ...action.payload };
+    },
+  },
   extraReducers: {
     [registerUser.pending]: (state) => {
       state.isLoadingUser = true;
@@ -99,5 +106,7 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const { setSelectedId } = userSlice.actions;
 
 export default userSlice.reducer;

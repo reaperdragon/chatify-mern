@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useTransition, animated } from "react-spring";
 import styled from "styled-components";
 import { FormRow } from "./";
+import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { searchUser } from "../features/user/userSlice";
+import { searchUser, setSelectedId } from "../features/user/userSlice";
 
 const SearchDrawer = ({ toggle, show }) => {
   const { users } = useSelector((state) => state.user);
@@ -55,14 +56,27 @@ const SearchDrawer = ({ toggle, show }) => {
                       {values.search === "" ? null : (
                         <div>
                           {users[0]?.map((user) => (
-                            <div key={user._id} className="search-users">
+                            <Content
+                              to="/"
+                              key={user._id}
+                              className="search-users"
+                              onClick={() => {
+                                dispatch(
+                                  setSelectedId({
+                                    selectedId: user._id,
+                                  })
+                                );
+                              }}
+                            >
                               <img
                                 src={user.avatar}
                                 alt="profile-user"
                                 className="profile"
                               />
-                              <p className="username-search">{user.username}</p>
-                            </div>
+                              <p className="username-search" onClick={toggle}>
+                                {user.username}
+                              </p>
+                            </Content>
                           ))}
                         </div>
                       )}
@@ -172,6 +186,9 @@ const Wrapper = styled.div`
     border-radius: 10px;
     margin: 10px 0;
     cursor: pointer;
+
+    text-decoration: none;
+    color: black;
   }
 
   .profile {
@@ -186,3 +203,5 @@ const Wrapper = styled.div`
     font-size: 16px;
   }
 `;
+
+const Content = styled(Link)``;
