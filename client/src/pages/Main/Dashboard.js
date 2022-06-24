@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
+import Chats from "./Chats";
+import Message from "./Message";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getAllChats } from "../../features/chat/chatSlice";
 
 const Dashboard = () => {
+  const { chats, isChatLoading } = useSelector((state) => state.chat);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllChats());
+  }, [dispatch]);
+
+  console.log(chats[0]);
+
   return (
     <Wrapper>
       <ContentWrapper>
         <div className="container">
-          <div className="container_1"></div>
-          <div className="container_2"></div>
+          <Chats chats={chats[0]} isChatLoading={isChatLoading} />
+          <Message />
         </div>
       </ContentWrapper>
     </Wrapper>

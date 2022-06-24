@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dashboard, SharedLayout } from "./pages/Main";
+import { Dashboard, SharedLayout, Message } from "./pages/Main";
 import { Register, Landing, Error, ProtectedLayout } from "./pages";
 
 function App() {
@@ -18,6 +18,7 @@ function App() {
           }
         >
           <Route index element={<Dashboard />} />
+          <Route path="/message/:id" element={<Message />} />
         </Route>
 
         <Route path="/landing" element={<Landing />} />
