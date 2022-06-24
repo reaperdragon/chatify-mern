@@ -32,9 +32,24 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const searchUser = createAsyncThunk(
+  "user/searchUser",
+  async (user, thunkAPI) => {
+    console.log(user);
+    try {
+      const resp = await api.get(`/api/v1/auth/users?search=${user}`);
+      console.log(resp.data);
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
 const initialState = {
   user: getUserFromLocalStorage(),
   isLoadingUser: false,
+  users: [],
 };
 
 export const userSlice = createSlice({
@@ -67,6 +82,18 @@ export const userSlice = createSlice({
       toast.success(`Welcome back! ${user.username}`);
     },
     [loginUser.rejected]: (state, { payload }) => {
+      state.isLoadingUser = false;
+      toast.error(payload);
+    },
+
+    [searchUser.pending]: (state) => {
+      state.isLoadingUser = true;
+    },
+    [searchUser.fulfilled]: (state, { payload }) => {
+      state.isLoadingUser = false;
+      state.users = [payload];
+    },
+    [searchUser.rejected]: (state, { payload }) => {
       state.isLoadingUser = false;
       toast.error(payload);
     },

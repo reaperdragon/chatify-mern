@@ -100,4 +100,13 @@ const login = async (req, res) => {
   });
 };
 
-export { register, login };
+const searchUser = async (req, res) => {
+  const { search } = req.query;
+
+  const user = await User.find({
+    username: { $regex: search, $options: "i" },
+  }).select("username avatar _id fullName email bio");
+  res.status(StatusCodes.OK).json(user);
+};
+
+export { register, login, searchUser };
