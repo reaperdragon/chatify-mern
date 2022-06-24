@@ -28,6 +28,9 @@ footer,header,hgroup,menu,nav,section {
 * {
   padding: 0;
   margin: 0;
+  overflow-y: scroll;
+   -ms-overflow-style: none;
+   scrollbar-width: none;
 }
 
 
@@ -39,7 +42,7 @@ footer,header,hgroup,menu,nav,section {
 
 ::-webkit-scrollbar
 {
-  width: 5px;
+  display: none;
   background-color: #FFF;
 }
 

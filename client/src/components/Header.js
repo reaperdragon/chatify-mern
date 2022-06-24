@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { FiSearch } from "react-icons/fi";
 
-const Header = () => {
+const Header = ({ toggle }) => {
   const { user } = useSelector((state) => state.user);
   return (
     <Wrapper>
       <ContentWrapper>
+        <div className="header_search" onClick={toggle}>
+          <FiSearch />
+          <p>Search Users</p>
+        </div>
+
         <h2 className="header_logo">Chatify</h2>
 
         <div className="header_profile">
@@ -26,7 +32,7 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-  height: 40px;
+  height: 60px;
 `;
 
 const ContentWrapper = styled.div`
@@ -35,6 +41,18 @@ const ContentWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  .header_search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+  }
 
   .header_logo {
     font-family: "Poppins";
