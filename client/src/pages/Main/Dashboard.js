@@ -33,7 +33,8 @@ const Dashboard = () => {
 export default Dashboard;
 
 const Wrapper = styled.div`
-  height: 100vh;
+  height: 85vh;
+  margin: 30px 0;
 `;
 
 const ContentWrapper = styled.div`
@@ -41,7 +42,8 @@ const ContentWrapper = styled.div`
     max-width: 1234px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(minmax(360px), auto);
+    grid-template-columns: minmax(360px, auto) 1fr;
     height: 100%;
+    grid-gap: 20px;
   }
 `;
