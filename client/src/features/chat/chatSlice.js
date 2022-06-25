@@ -16,6 +16,20 @@ export const getAllChats = createAsyncThunk(
   }
 );
 
+export const getChat = createAsyncThunk(
+  "chat/getChat",
+  async (userId, thunkAPI) => {
+    console.log(userId);
+    try {
+      const resp = await api.post("/api/v1/chat", { userId });
+      console.log(resp.data);
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
 const initialState = {
   chats: [],
   isChatLoading: false,
@@ -33,6 +47,19 @@ export const ChatSlice = createSlice({
       state.chats = [...state.chats, payload];
     },
     [getAllChats.rejected]: (state, { payload }) => {
+      state.isChatLoading = false;
+      toast.error(payload);
+    },
+
+    [getChat.pending]: (state) => {
+      state.isChatLoading = true;
+    },
+    [getChat.fulfilled]: (state, { payload }) => {
+      state.isChatLoading = false;
+      console.log(payload);
+      state.chats = [...state.chats, payload];
+    },
+    [getChat.rejected]: (state, { payload }) => {
       state.isChatLoading = false;
       toast.error(payload);
     },

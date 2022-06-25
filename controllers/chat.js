@@ -25,7 +25,7 @@ const getChat = async (req, res) => {
 
   chat = await User.populate(chat, {
     path: "latestMessage.sender",
-    select: "username avatar email fullName",
+    select: "username avatar email fullName _id",
   });
 
   if (chat.length > 0) {
@@ -55,7 +55,7 @@ const getChats = async (req, res) => {
 
   const user = await User.populate(chat, {
     path: "latestMessage.sender",
-    select: "username avatar email fullName",
+    select: "username avatar email fullName _id",
   });
 
   res.status(StatusCodes.OK).json(user);

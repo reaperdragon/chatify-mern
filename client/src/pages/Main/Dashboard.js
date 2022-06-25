@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 import Chats from "./Chats";
@@ -41,7 +41,7 @@ const ContentWrapper = styled.div`
     max-width: 1234px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(minmax(360px), auto);
     height: 100%;
   }
 `;

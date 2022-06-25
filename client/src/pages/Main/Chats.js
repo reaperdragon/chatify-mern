@@ -1,8 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 
 const Chats = ({ chats, isChatLoading }) => {
+
   console.log(chats);
-  console.log(chats?.length);
 
   if (isChatLoading) {
     return <div>Please Wait For The Chat to Load</div>;
@@ -12,7 +13,21 @@ const Chats = ({ chats, isChatLoading }) => {
     return <div>Please Search User for Start Conversation</div>;
   }
 
-  return <div>Chats</div>;
+  return (
+    <Wrapper>
+      {chats?.map((chat) => (
+        <div key={chat._id}>
+          {chat?.isGroupChat ? (
+            <span>{chat.chatName}</span>
+          ) : (
+            <span>{chat?.users?.[1]?.username}</span>
+          )}
+        </div>
+      ))}
+    </Wrapper>
+  );
 };
 
 export default Chats;
+
+const Wrapper = styled.div``;

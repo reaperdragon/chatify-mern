@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { searchUser, setSelectedId } from "../features/user/userSlice";
+import { searchUser } from "../features/user/userSlice";
+import { getChat } from "../features/chat/chatSlice";
 
 const SearchDrawer = ({ toggle, show }) => {
   const { users } = useSelector((state) => state.user);
@@ -55,26 +56,22 @@ const SearchDrawer = ({ toggle, show }) => {
                     <div className="container_1--search-users">
                       {values.search === "" ? null : (
                         <div>
-                          {users[0]?.map((user) => (
+                          {users[0]?.map((u) => (
                             <Content
                               to="/"
-                              key={user._id}
+                              key={u?._id}
                               className="search-users"
                               onClick={() => {
-                                dispatch(
-                                  setSelectedId({
-                                    selectedId: user._id,
-                                  })
-                                );
+                                dispatch(getChat(u?._id));
                               }}
                             >
                               <img
-                                src={user.avatar}
+                                src={u.avatar}
                                 alt="profile-user"
                                 className="profile"
                               />
                               <p className="username-search" onClick={toggle}>
-                                {user.username}
+                                {u.username}
                               </p>
                             </Content>
                           ))}
@@ -126,7 +123,7 @@ const Wrapper = styled.div`
   }
 
   .container_1--search {
-    height: 40vh;
+    height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     width: 80%;
