@@ -31,6 +31,7 @@ import UserListItem from "./UserListItem";
 import { useAppContext } from "../context/ChatProvider";
 import ProfileModal from "./ProfileModal";
 import { removeUserFromLocalStorage } from "../utils/localStorage";
+import { getSender } from "../config/chat";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -118,9 +119,27 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
+              {notification?.length > 0 ? (
+                <>{toast.info(`New Message`)}</>
+              ) : null}
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
-            {/* <MenuList ></MenuList> */}
+            <MenuList pl={2}>
+              {!notification?.length && "No New Message"}
+              {notification?.map((noti) => (
+                <MenuItem
+                  key={noti._id}
+                  onClick={() => {
+                    setSelectedChat(noti.chat);
+                    setNotification(notification.filter((n) => n !== noti));
+                  }}
+                >
+                  {noti.chat.isGroupChat
+                    ? `New Message in ${noti?.chat?.chatName} `
+                    : ` New Message from ${getSender(user, noti?.chat?.users)}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

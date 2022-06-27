@@ -38,7 +38,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await api.get(`/api/v1/message/${selectedChat._id}`);
-      console.log(data);
+
       setMessages(data);
       setLoading(false);
       socket.emit("join-chat", selectedChat._id);
@@ -55,9 +55,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           message: newMessage,
           chatId: selectedChat._id,
         });
-        console.log("====================================");
-        console.log(data);
-        console.log("====================================");
+
         setNewMessage("");
         socket.emit("new-message", data);
         setMessages([...messages, data]);
@@ -83,6 +81,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
+  console.log("====================================");
+  console.log(notification);
+  console.log("====================================");
+
   useEffect(() => {
     socket.on("message-received", (newMessageReceived) => {
       if (
@@ -90,6 +92,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
         // notification
+        if (!notification.includes(newMessageReceived)) {
+          setNotification([newMessageReceived, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
       } else {
         setMessages([...messages, newMessageReceived]);
       }
