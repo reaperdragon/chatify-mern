@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context/ChatProvider";
 import { SideDrawer, MyChats, ChatBox } from "../components";
 import { Box } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { getUserFromLocalStorage } from "../utils/localStorage";
 
 const Chat = () => {
   const { user } = useAppContext();
   const [fetchAgain, setFetchAgain] = useState(false);
+  
+
+
 
   return (
     <div style={{ width: "100%" }}>

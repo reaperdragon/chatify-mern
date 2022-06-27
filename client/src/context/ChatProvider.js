@@ -16,6 +16,9 @@ const ChatProvider = ({ children }) => {
     const loggedInUser = getUserFromLocalStorage("user");
     setUser(loggedInUser);
 
+    if (!loggedInUser) {
+      navigate("/register");
+    }
   }, [navigate]);
 
   return (

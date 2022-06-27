@@ -53,7 +53,7 @@ const SideDrawer = () => {
 
   const logoutHandler = () => {
     removeUserFromLocalStorage("user");
-    navigate("/landing");
+    navigate("/register");
   };
 
   const handleSearch = async () => {
@@ -141,7 +141,7 @@ const SideDrawer = () => {
                     setNotification(notification.filter((n) => n !== noti));
                   }}
                 >
-                  {noti.chat.isGroupChat
+                  {noti?.chat?.isGroupChat
                     ? `New Message in ${noti?.chat?.chatName} `
                     : ` New Message from ${getSender(user, noti?.chat?.users)}`}
                 </MenuItem>
