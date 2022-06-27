@@ -14,13 +14,12 @@ import {
   Drawer,
   DrawerBody,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../utils/axios";
 import { Spinner } from "@chakra-ui/react";
 import { FiSearch } from "react-icons/fi";
@@ -68,7 +67,6 @@ const SideDrawer = () => {
 
       const { data } = await api.get(`/api/v1/auth/users?search=${search}`);
 
-      console.log(data);
 
       setLoading(false);
       setSearchResult(data);
@@ -78,7 +76,7 @@ const SideDrawer = () => {
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
+ 
 
     try {
       setLoadingChat(true);

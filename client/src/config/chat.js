@@ -9,8 +9,6 @@ export const getSenderFull = (loggedUser, users) => {
 };
 
 export const isSameSenderMargin = (messages, m, i, userId) => {
-  // console.log(i === messages.length - 1);
-
   if (
     i < messages.length - 1 &&
     messages[i + 1].sender._id === m.sender._id &&

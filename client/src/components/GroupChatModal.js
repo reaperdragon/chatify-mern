@@ -11,7 +11,6 @@ import {
   useDisclosure,
   FormControl,
   Input,
-  useToast,
   Box,
 } from "@chakra-ui/react";
 import api from "../utils/axios";
@@ -28,7 +27,7 @@ const GroupChatModal = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { user, chats, setChats } = useAppContext();
+  const { chats, setChats } = useAppContext();
 
   const handleSearch = async (query) => {
     setSearch(query);
@@ -40,7 +39,7 @@ const GroupChatModal = ({ children }) => {
       setLoading(true);
 
       const { data } = await api.get(`/api/v1/auth/users?search=${search}`);
-      console.log(data);
+
       setLoading(false);
       setSearchResult(data);
     } catch (error) {

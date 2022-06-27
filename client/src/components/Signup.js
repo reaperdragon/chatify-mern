@@ -39,7 +39,7 @@ const Signup = () => {
         password,
         avatar,
       });
-      console.log(data);
+      
       toast.success(`Hi There! ${data.username} `);
       addUserToLocalStorage(data);
 

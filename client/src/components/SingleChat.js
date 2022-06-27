@@ -68,7 +68,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket = io(process.env.REACT_APP_SOCKET_ENDPOINT);
     socket.emit("setup", user);
-    console.log("Working");
+    
     socket.on("connected", () => setSocketConnected(true));
 
     socket.on("typing", () => setIsTyping(true));
@@ -80,10 +80,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
-
-  console.log("====================================");
-  console.log(notification);
-  console.log("====================================");
 
   useEffect(() => {
     socket.on("message-received", (newMessageReceived) => {

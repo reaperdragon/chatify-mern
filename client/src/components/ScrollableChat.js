@@ -1,8 +1,12 @@
 import { Avatar, Tooltip } from "@chakra-ui/react";
-import React,{useRef,useEffect} from "react";
-import { isLastMessage, isSameSender, isSameSenderMargin, isSameUser } from "../config/chat";
+import React, { useRef, useEffect } from "react";
+import {
+  isLastMessage,
+  isSameSender,
+  isSameSenderMargin,
+  isSameUser,
+} from "../config/chat";
 import { useAppContext } from "../context/ChatProvider";
-
 
 const ScrollableChat = ({ messages }) => {
   const { user } = useAppContext();
@@ -14,7 +18,7 @@ const ScrollableChat = ({ messages }) => {
   };
 
   useEffect(() => {
-    scrollToBottom()
+    scrollToBottom();
   }, [messages]);
 
   return (

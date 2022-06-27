@@ -13,13 +13,12 @@ import { getSender } from "../config/chat";
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
 
-  const { selectedChat, setSelectedChat, user, chats, setChats } =
-    useAppContext();
+  const { selectedChat, setSelectedChat, chats, setChats } = useAppContext();
 
   const fetchChats = async () => {
     try {
       const { data } = await api.get("/api/v1/chat");
-      console.log(data);
+
       setChats(data);
     } catch (error) {
       toast.error(error);
