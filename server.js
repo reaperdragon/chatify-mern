@@ -3,6 +3,10 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
+import helmet from "helmet";
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
+
 import morgan from "morgan";
 
 import "express-async-errors";
@@ -35,6 +39,9 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(express.json());
 app.use(cors());
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
 
 app.get("/", (req, res) => {
   res.send("Server Running!");
