@@ -74,8 +74,14 @@ const Login = () => {
         </InputGroup>
       </FormControl>
       <Button
-        colorScheme="blue"
+        background="rgba(67, 43, 255, 0.8)"
         width="100%"
+        color="white"
+        _hover={{
+          background: " rgba(67, 43, 255, 0.8)",
+          color: "white",
+          transform: "translate(0,-5px)",
+        }}
         style={{ marginTop: 15 }}
         onClick={submitHandler}
         isLoading={values.loading}
@@ -86,6 +92,11 @@ const Login = () => {
         variant="solid"
         colorScheme="red"
         width="100%"
+        _hover={{
+          background: " red",
+          color: "white",
+          transform: "translate(0,-5px)",
+        }}
         onClick={() => {
           setValues({ email: "test@gmail.com", password: "t1s25!96" });
         }}

@@ -120,7 +120,6 @@ const GroupChatModal = ({ children }) => {
               ))}
             </Box>
             {loading ? (
-              // <ChatLoading />
               <div>Loading...</div>
             ) : (
               searchResult
@@ -139,6 +138,11 @@ const GroupChatModal = ({ children }) => {
               fontFamily="Poppins"
               onClick={handleSubmit}
               colorScheme="blue"
+              background=" rgba(67, 43, 255, 0.8)"
+              _hover={{
+                background: " rgba(67, 43, 255, 0.8)",
+                color: "white",
+              }}
             >
               Create Chat
             </Button>

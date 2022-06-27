@@ -1,0 +1,22 @@
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mockup {
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .mockup {
+    display: none;
+  }
+}

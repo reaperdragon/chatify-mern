@@ -172,6 +172,11 @@ const UpdateGroupChatModel = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
               <Button
                 variant="solid"
                 colorScheme="teal"
+                background=" rgba(67, 43, 255, 0.8)"
+                _hover={{
+                  background: " rgba(67, 43, 255, 0.8)",
+                  color: "white",
+                }}
                 ml={1}
                 isLoading={renameloading}
                 onClick={handleRename}

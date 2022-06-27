@@ -53,7 +53,7 @@ const SideDrawer = () => {
 
   const logoutHandler = () => {
     removeUserFromLocalStorage("user");
-    navigate("/register");
+    navigate("/landing");
   };
 
   const handleSearch = async () => {
@@ -67,7 +67,6 @@ const SideDrawer = () => {
 
       const { data } = await api.get(`/api/v1/auth/users?search=${search}`);
 
-
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -76,8 +75,6 @@ const SideDrawer = () => {
   };
 
   const accessChat = async (userId) => {
- 
-
     try {
       setLoadingChat(true);
 
@@ -111,7 +108,19 @@ const SideDrawer = () => {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Poppins">
+        <Text
+          fontSize="2xl"
+          fontFamily="Poppins"
+          css={{
+            background:
+              "linear-gradient(110.29deg, #2E5CFF 11.11%, #973DF0 60.96%)",
+            textFillColor: "text",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            " -webkit-text-fill-color": "transparent",
+            fontWeight: 700,
+          }}
+        >
           Chatify
         </Text>
         <div>

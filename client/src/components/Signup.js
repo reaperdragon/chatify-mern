@@ -39,7 +39,7 @@ const Signup = () => {
         password,
         avatar,
       });
-      
+
       toast.success(`Hi There! ${data.username} `);
       addUserToLocalStorage(data);
 
@@ -94,8 +94,14 @@ const Signup = () => {
         />
       </FormControl>
       <Button
-        colorScheme="blue"
+        background="rgba(67, 43, 255, 0.8)"
+        color="white"
         width="100%"
+        _hover={{
+          background: " rgba(67, 43, 255, 0.8)",
+          color: "white",
+          transform: "translate(0,-5px)",
+        }}
         style={{ marginTop: 15 }}
         onClick={submitHandler}
       >
