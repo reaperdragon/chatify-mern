@@ -10,7 +10,7 @@ import {
 } from "../errors/index.js";
 
 const register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, avatar } = req.body;
 
   if (!username || !email || !password) {
     throw new BadRequestError("Please Provide All Values");
@@ -29,6 +29,7 @@ const register = async (req, res) => {
     username,
     email,
     password: hashPassword,
+    avatar,
   });
 
   const token = jwt.sign(
