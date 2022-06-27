@@ -11,12 +11,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: 4,
   },
-  fullName: {
-    type: String,
-    required: [true, "Please Provide a Username"],
-    trim: true,
-    minlength: 4,
-  },
   avatar: {
     type: String,
     default: image,

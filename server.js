@@ -21,6 +21,7 @@ import authenticateUser from "./middleware/auth.js";
 //routes
 import authRoute from "./routes/auth.js";
 import chatRoute from "./routes/chat.js";
+import messageRoute from './routes/message.js'
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/chat", authenticateUser, chatRoute);
+app.use("/api/v1/message", authenticateUser, messageRoute);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

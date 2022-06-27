@@ -1,33 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { Register, Chat } from "./Pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Dashboard, SharedLayout, Message } from "./pages/Main";
-import { Register, Landing, Error, ProtectedLayout } from "./pages";
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectedLayout>
-              <SharedLayout />
-            </ProtectedLayout>
-          }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="/message/:id" element={<Message />} />
-        </Route>
-
-        <Route path="/landing" element={<Landing />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Error />} />
+        <Route path="/" element={<Chat />} />
       </Routes>
       <ToastContainer position="top-center" />
-    </>
+    </div>
   );
-}
+};
 
 export default App;

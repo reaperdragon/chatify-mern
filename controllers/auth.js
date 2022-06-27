@@ -10,9 +10,9 @@ import {
 } from "../errors/index.js";
 
 const register = async (req, res) => {
-  const { username, email, fullName, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!username || !email || !fullName || !password) {
+  if (!username || !email || !password) {
     throw new BadRequestError("Please Provide All Values");
   }
 
@@ -27,7 +27,6 @@ const register = async (req, res) => {
 
   const user = await User.create({
     username,
-    fullName,
     email,
     password: hashPassword,
   });
@@ -48,7 +47,6 @@ const register = async (req, res) => {
     _id: user._id,
     username: user.username,
     email: user.email,
-    fullName: user.fullName,
     avatar: user.avatar,
     token,
   });
@@ -94,7 +92,6 @@ const login = async (req, res) => {
     _id: isUser._id,
     username: isUser.username,
     email: isUser.email,
-    fullName: isUser.fullName,
     avatar: isUser.avatar,
     token,
   });
@@ -105,7 +102,8 @@ const searchUser = async (req, res) => {
 
   const user = await User.find({
     username: { $regex: search, $options: "i" },
-  }).select("username avatar _id fullName email bio");
+  }).select("username avatar _id email bio");
+
   res.status(StatusCodes.OK).json(user);
 };
 
